@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compartible" content="IE-edge">
+	<meta name="viewport" content="width-device-width, initial-scale=1">
+	<title>Home</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/angular-material.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/sweetalert2.min.css">
+	<script src="js/sweetalert2.min.js"></script>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/material-lib/angular-animate.min.js"></script>
+	<script src="js/material-lib/angular-aria.min.js"></script>
+	<script src="js/material-lib/angular-sanitize.js"></script>
+	<script src="js/material-lib/angular-material.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="EmpCtrl">
+	<nav class="navbar navbar-fixed-top z-depth-1" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand waves-effect waves-light" href="index.html">Home</a>
+			</div>
+		</div>
+	</nav>
+	<div class="wrapper" style="padding-top: 7%;padding-left: 7%;">
+		<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+			<form class='form-horizontal' role='form' name="empForm" ng-submit="submitForm(empForm.$valid)" novalidate>
+				<div class='form-group'>
+					<md-input-container>
+						<label>EmpId</label>
+						<input ng-model="empId" class='form-control' id='EmpId' placeholder='EmpId' type='text' name="empId" ng-required="true">
+					</md-input-container>
+					<div class="msg-block" style="padding-bottom: 0px;margin-bottom: 0px">
+						<span ng-show="userForm.addr1.$invalid && !userForm.addr1.$pristine" class="help-block" style="color: red;">Emp Id is required.</span>
+					</div>
+					<div>
+						<md-button type="submit">Submit</md-button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div>
+			<md-content layout-padding>
+				<p>First Name: <span>{{firstName}}</span><p>
+	        	<p>Middle Name: <span>{{middleName}}</span><p>
+	        	<p>Last Name: <span>{{lastName}}</span><p>
+	        	<p>DOB: <span>{{dob}}</span><p>
+	        	<p>Marital Status: <span>{{maritalStatus}}</span><p>
+	        	<p>Employee Type: <span>{{empType}}</span><p>
+	        	<p>Employee Designation: <span>{{empDesignation}}</span><p>
+	        	<p>Title: <span>{{title}}</span><label>
+	        	<p>Work Authorization: <span>{{workAuthorization}}</span><p>
+	        	<p>Start Date: <span>{{startDate}}</span><p>
+	        	<p>End Date: <span>{{endDate}}</span><p>
+			</md-content>			       	       
+	    </div>
+	    <script src="js/app/app.js"></script>
+	    <script src="js/factory/urlFactory.js"></script>
+		<script src="js/service/empService.js"></script>
+	    <script src="js/controllers/employeeController.js"></script>
+	</body>
+</html>
