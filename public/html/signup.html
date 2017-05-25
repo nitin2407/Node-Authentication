@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compartible" content="IE-edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home</title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="scripts/angular-material/angular-material.min.css">
+	<link rel="stylesheet" href="../css/loginstyle.css">
+	<link rel="stylesheet" href="../css/sweetalert2.min.css">
+	<script src="../js/sweetalert2.min.js"></script>
+	<script src="../js/jquery-2.1.4.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="scripts/angular/angular.min.js"></script>
+	<script src="scripts/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="scripts/node_modules/angular-material/angular-material.min.js"></script>
+	<script src="scripts/node_modules/angular-animate/angular-animate.min.js"></script>
+	<script src="scripts/node_modules/angular-messages/angular-messages.min.js"></script>
+	<script src="scripts/node_modules/angular-aria/angular-aria.min.js"></script>
+	<script src="scripts/node_modules/angular-sanitize/angular-sanitize.js"></script>
+	
+	<!--<script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>-->
+</head>
+
+<body>
+	<div ng-app="myApp">
+		<md-content ng-controller="signupCtrl" layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak"
+		 class="signup-form" novalidate>
+			<md-card flex="flex" flex-gt-sm="50" flex-gt-md="33">
+				<md-toolbar>
+					<div class="md-toolbar-tools">
+						<h2><span>Sign up Form</span></h2>
+					</div>
+				</md-toolbar>
+				<md-card-content>
+					<form name="signupForm" ng-submit="submitForm(signupForm.$valid)" novalidate>
+						<md-input-container>
+							<label>First Name</label>
+							<input type="text" name="fname" ng-model="fname" placeholder="first name" required="" />	
+							<div ng-messages="signupForm.fname.$error" role="alert" md-auto-hide="false">
+								<div ng-message="required" class="my-message">Please enter your first name.</div>
+								<!--<div ng-message="email" class="my-message">Please enter valid email.</div>-->
+							</div>
+						</md-input-container>
+						<md-input-container>
+							<label>Last Name</label>
+							<input type="text" name="lname" ng-model="lname" placeholder="last name"/>
+						</md-input-container>
+						<md-input-container >
+							<label>email</label>
+							<input type="text" name="email" ng-model="email" placeholder="email" required=""/>
+							<div ng-messages="signupForm.email.$error" role="alert">
+								<div ng-message="required" class="my-message">Please enter your email.</div>
+							</div>
+						</md-input-container>
+						<md-input-container>
+							<label>Password</label>
+							<input type="password" name="password" ng-model="password" placeholder="password" required="" md-maxlength="16"
+							/>
+							<div ng-messages="signupForm.password.$error" role="alert" multiple="">
+								<div ng-message="required" class="my-message">Please enter your password.</div>
+								<div ng-message="md-maxlength" class="my-message">Too long.</div>
+							</div>
+						</md-input-container>
+						<div flex = "80" layout="row" layout-sm="column" layout-align="space-around center" layout-wrap>
+							<md-button type="submit" ng-disabled="!signupForm.$valid" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
+							<md-button type="button" class="md-raised md-warn">&nbsp Cancel &nbsp</md-button>
+						</div>
+					</form>
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
+	<script src="../js/app/app.js"></script>
+	<script src="../js/config/routes.js"></script>
+	<script src="../js/factory/urlFactory.js"></script>
+	<script src="../js/service/loginService.js"></script>
+	<script src="../js/controllers/signupController.js"></script>
+</body>
+
+</html>

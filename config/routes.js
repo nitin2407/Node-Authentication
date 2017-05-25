@@ -19,7 +19,7 @@ module.exports = function (app, passport) {
         //res.writeHead(400, {'Content-Type': 'text/plain'});;
         //res.send('Error');
         //res.status(409);
-        res.json({message: req.flash('loginMessage')});
+        res.json({message: req.flash('ErrorMessage')});
     });
 
     router.get("/employee/:emp_id", isLoggedIn, (req, res) => {
@@ -30,6 +30,12 @@ module.exports = function (app, passport) {
         successRedirect: '/employee', // redirect to the secure profile section
         failureRedirect: '/error', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
+    }));
+
+    router.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/employee', // redirect to the secure profile section
+        failureRedirect : '/error', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
     }));
 
     /*router.post('/login', function (req, res) {

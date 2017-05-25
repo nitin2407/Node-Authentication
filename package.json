@@ -1,17 +1,32 @@
 {
-  "name": "MeanProject",
+  "name": "NodeSecurities",
   "version": "1.0.0",
   "description": "first mean porject",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/nitin2407/NodeSecurities.git"
+  },
   "keywords": [],
   "author": "Nitin",
   "license": "ISC",
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.3",
+    "angular": "^1.6.3",
+    "angular-animate": "^1.6.3",
+    "angular-aria": "^1.6.3",
+    "angular-material": "^1.1.4",
+    "angular-messages": "^1.6.3",
+    "angular-route": "^1.6.3",
+    "angular-sanitize": "^1.6.3",
+    "angular-touch": "^1.6.3",
+    "angular-ui-router": "^1.0.3",
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.5.2",
+    "connect-flash": "~0.1.1",
     "cookie-parser": "^1.4.3",
     "express": "~4.7.2",
     "express-session": "~1.0.0",
@@ -19,7 +34,6 @@
     "morgan": "~1.2.2",
     "mysql": "^2.5.4",
     "passport": "~0.1.17",
-    "connect-flash" : "~0.1.1",
     "passport-local": "~0.1.6"
   }
 }
