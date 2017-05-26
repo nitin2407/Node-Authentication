@@ -15,6 +15,10 @@ module.exports = function (app, passport) {
         res.send('api works');
     });
 
+    router.get('/admin', isLoggedIn, isAdmin, (req, res) => {
+        res.send('admin page');
+    });
+
     router.get('/error', (req, res) => {
         //res.writeHead(400, {'Content-Type': 'text/plain'});;
         //res.send('Error');
@@ -45,20 +49,37 @@ module.exports = function (app, passport) {
     return router;
 };
 
-//var db = require('./db');
-
-//module.exports = function(app,passport){
-
-//}
-
 function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on 
+    // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
 
     // if they aren't redirect them to the home page
     res.redirect('/');
+}
+
+function isAdmin(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    console.log('checking for admin:' + req.user.email);
+    db.get_roles(req.user.email,req,function(err,user){
+        if(!err){
+            console.log('got role as:' + user.role_id);
+            if(user.role_id == 2){
+                return next();
+            }
+            else{
+                console.log('not admin');
+                res.redirect('/');
+            }
+        }
+        else{
+            res.redirect('/');
+        }
+    })
+    // if not admin redirect them to the home page
+    
 }
 
 

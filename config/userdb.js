@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 
 var pool = require('./ConnectionPool');
+var bcrypt   = require('bcrypt-nodejs');
 
 function select_emp(req, res, data) {
 
@@ -76,7 +77,7 @@ function login(email,password,req, done) {
                         if (!rows.length) {
                             return done(err, req.flash('ErrorMessage', 'No user found.'));
                         }
-                        if (!(rows[0].password == password))
+                        if(!bcrypt.compareSync(password, rows[0].password))
                             return done(err, req.flash('ErrorMessage', 'Oops! Wrong password.'));
 
                         return done(null, rows[0]);
@@ -138,6 +139,7 @@ function find_emp(email,req, done) {
 
 }
 
+
 function register(email,password,req, done) {
     
     pool.getConnection(function (err, connection) {
@@ -147,7 +149,10 @@ function register(email,password,req, done) {
 
                 console.log('connected as id ' + connection.threadId);
 
-                connection.query("Insert into emp values(null,?,?,?,?)", [email,password,req.body.fname,req.body.lname], function (err, result) {
+                var hashpassword = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+                console.log("has :" + hashpassword);
+
+                connection.query("Insert into emp values(null,?,?,?,?,?)", [email,hashpassword,req.body.fname,req.body.lname,1], function (err, result) {
                     connection.release();
                     if (!err) {
                         if (result<=0) {
@@ -165,11 +170,38 @@ function register(email,password,req, done) {
 }
 
 
+function get_roles(email, req, done) {
+    
+    pool.getConnection(function (err, connection) {
+                if (err) {
+                    return done(err, req.flash('ErrorMessage', 'Error in connection database.'));
+                }
+
+                console.log('connected as id ' + connection.threadId);
+
+                connection.query("select role_id from emp where email = ?", email, function (err, rows) {
+                    connection.release();
+                    if (!err) {
+                        if (!rows.length) {
+                            return done(err, req.flash('ErrorMessage', 'No records'));
+                        }
+                        return done(null, rows[0]);
+                    }
+                });
+
+                connection.on('error', function (err) {
+                    return done(err, req.flash('ErrorMessage', 'Error in connection database.'));
+                });
+            });
+
+}
+
 
 
 module.exports = {
     select_emp,
     login,
     find_emp,
-    register
+    register,
+    get_roles
 }
