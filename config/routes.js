@@ -3,7 +3,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 //var passport = require('passport'); 
 //require('./passport')(passport);
-var db = require('./db');
+var db = require('./userdb');
 router.use(bodyParser.urlencoded({'extended':'true'}));
 router.use(bodyParser.json()); 
 router.use(bodyParser.json({ type: 'application/vnd.api+json' }));

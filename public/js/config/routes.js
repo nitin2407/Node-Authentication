@@ -2,26 +2,26 @@ var app = angular.module('myApp');
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
         .state('login', {
             url: '/login',
-            templateUrl: 'index.html',
-            controller: 'loginController'
+            templateUrl: 'html/login.html',
+            //controller: 'loginController'
         })
 
         .state('signup', {
             url: '/signup',
             templateUrl: 'html/signup.html',
-            controller: 'signupController'
+            //controller: 'signupController'
         })
 
-        /*.state('home'), {
+        .state('home', {
             url: '/home',
             templateUrl: 'html/home.html',
-            controller: 'homeController'
-        }*/
+            //controller: 'homeController'
+        })
 
     $locationProvider.html5Mode({
         enabled: true,

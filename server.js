@@ -31,9 +31,9 @@ var api = require('./config/routes.js')(app, passport);
 
 app.use('/', api);  
 
-app.get('*', function(req, res) {
+/*app.get('*', function(req, res) {
         res.sendfile('index.html');
-    });
+    });*/
 
 app.listen(3000);
 

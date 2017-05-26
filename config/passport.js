@@ -1,5 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var pool = require('./ConnectionPool');
+var db = require('./userdb');
 
 module.exports = function (passport) {
 
@@ -41,7 +42,16 @@ module.exports = function (passport) {
 
             console.log('into local-login' + email + password);
 
-            pool.getConnection(function (err, connection) {
+
+            db.login(email, password, req, function(err,user){
+                if(err){
+                    return done(err);
+                }
+                else{
+                    return done(null,user);
+                }
+            });
+            /*pool.getConnection(function (err, connection) {
                 if (err) {
                     return done(null, false, req.flash('ErrorMessage', 'Error in connection database.'));
                 }
@@ -64,7 +74,7 @@ module.exports = function (passport) {
                 connection.on('error', function (err) {
                     return done(null, false, req.flash('ErrorMessage', 'Error in connection database.'));
                 });
-            });
+            });*/
 
         }));
 
@@ -78,12 +88,29 @@ module.exports = function (passport) {
 
             console.log('into local-signup' + email + password);
 
-            pool.getConnection(function (err, connection) {
+             db.register(email,password, req, function(err,result){
+                if(err){
+                    return done(err);
+                }
+                else{
+                    db.find_emp(email,req,function(err,user){
+                        if(err){
+                            return done(err);
+                        }
+                        else{
+                            return done(null,user);
+                        }
+                    })
+                    
+                }
+            });
+
+            /*pool.getConnection(function (err, connection) {
                 if (err) {
                     return done(null, false, req.flash('ErrorMessage', 'Error in connection database.'));
                 }
 
-                connection.query("Insert into emp values(null,?,?,?,?)", [email,password,req.body.fname,req.body.fname], function (err, result) {
+                connection.query("Insert into emp values(null,?,?,?,?)", [email,password,req.body.fname,req.body.lname], function (err, result) {
                     connection.release();
                     if (!err) {
                         if(result<=0){
@@ -100,7 +127,7 @@ module.exports = function (passport) {
                 connection.on('error', function (err) {
                     return done(null, false, req.flash('ErrorMessage', 'Error in connection database.'));
                 });
-            });
+            });*/
 
         }));
 
