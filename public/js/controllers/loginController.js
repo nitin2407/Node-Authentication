@@ -6,6 +6,11 @@ app.controller('loginCtrl', function ($scope, $http, $timeout, $window, loginSer
 			email: $scope.email,
 			password: $scope.password
 		};
+
+		$scope.fbauth = function(){
+			loginService.fblogin();
+		}
+
 		if (isValid) {
 
 			loginService.login($scope.userDetails).then(

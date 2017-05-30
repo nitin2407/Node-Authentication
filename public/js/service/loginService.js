@@ -8,4 +8,8 @@ app.service('loginService',function($http){
         return $http.post('/login', obj);
     };
 
+    this.fblogin = function(){
+        return $http.get('/auth/facebook');
+    }
+
 });
