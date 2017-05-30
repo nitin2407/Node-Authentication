@@ -153,11 +153,23 @@ function register(user, req, done) {
         var hashpassword = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8), null);
 
         connection.query("Insert into emp values(null,?,?,?,?,?)", [user.email, hashpassword, user.fname, user.lname, 1], function (err, result) {
+            console.log('User creation query completed');
             connection.release();
+            if(err.code == 'ER_DUP_ENTRY'){
+                console.log(err.code);
+                return done(err, req.flash('ErrorMessage', 'User already exists'));
+            }
+            
+            if(err){
+                console.log(err.name);
+                return done(err, req.flash('ErrorMessage', 'User already exists'));
+            }
+            
             if (!err) {
-                if (result <= 0) {
+                /*if (result <= 0) {
+                    console.log('User already exists-not able to create new');
                     return done(err, req.flash('ErrorMessage', 'User already exists'));
-                }
+                }*/
                 return done(null, result);
             }
         });
@@ -235,9 +247,15 @@ function registerFacebookUser(user, req, done) {
     //console.log("inside fb registeer module");
     user.password = 'fbuser_' + user.id;
     register(user, req, function (err, result) {
-        if (err) {
+        if (err && err.code!='ER_DUP_ENTRY') {
+            //console.log(req.flash('ErrorMessage'));
+            console.log(err.code);
             return done(err);
         }
+        /*else if (err){
+            console.log(err);
+            return done(err);
+        }*/
         else {
             find_emp(user.email, req, function (err, mainuser) {
                 if (err) {
