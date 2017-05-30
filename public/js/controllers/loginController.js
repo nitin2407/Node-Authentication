@@ -16,6 +16,21 @@ app.controller('loginCtrl', function ($scope, $http, $timeout, $window, loginSer
 		)
 	}
 
+	$scope.googleauth = function () {
+		loginService.googlelogin().then(
+			function (data, status) {
+				console.log(data);
+			},
+			function (data, status) {
+				swal({
+					title: 'error',
+					type: 'warning',
+					showCloseButton: true
+				});
+			}
+		)
+	}
+
 	$scope.submitForm = function (isValid) {
 
 		$scope.userDetails = {

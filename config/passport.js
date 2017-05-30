@@ -1,5 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var pool = require('./ConnectionPool');
 var db = require('./userdb');
 var configAuth = require('./auth');
@@ -200,5 +201,65 @@ module.exports = function (passport) {
 
             });
         }));
+
+        passport.use(new GoogleStrategy({
+
+        // pull in our app id and secret from our auth.js file
+        clientID: configAuth.googleAuth.clientID,
+        clientSecret: configAuth.googleAuth.clientSecret,
+        callbackURL: configAuth.googleAuth.callbackURL,
+        //profileFields: ['id', 'email', 'displayName', 'first_name', 'last_name'],
+        passReqToCallback: true
+    },
+
+        // facebook will send back the token and profile
+        function (req, token, refreshToken, profile, done) {
+
+            //console.log("profile id found as: " + profile.id);
+            //console.log("profile id found as: " + profile.name.givenName);
+            console.log("profile email found as: " + profile.emails[0].value);
+
+            db.findFacebookUser(profile.id, req, function (err, user) {
+
+                // if there is an error, stop everything and return that
+                // ie an error connecting to the database
+                if (err)
+                    return done(err);
+                console.log("no error");
+                // if the user is found, then log them in
+                if (user) {
+                    return done(null, user); // user found, return that user
+                } else {
+                    // if there is no user found with that facebook id, create them
+                    console.log("no user found");
+                    var user = {
+                        id: profile.id,
+                        token: token,
+                        fname: profile.name.givenName,
+                        lname: profile.name.familyName,
+                        email: profile.emails[0].value
+                    }
+                    console.log("found user details: " + profile.id);
+                    console.log("found user details: " + profile.name.givenName);
+                    db.registerFacebookUser(user, req, function (err, result) {
+                        if (err) {
+                            return done(err);
+                        }
+                        else {
+                            db.find_emp(user.email, req, function (err, mainuser) {
+                                if (err) {
+                                    return done(err);
+                                }
+                                else {
+                                    return done(null, mainuser);
+                                }
+                            })
+                        }
+                    });
+                }
+
+            });
+        }));
+
 
 };

@@ -20,14 +20,18 @@ module.exports = function (app, passport) {
         console.log('headers set');
         next();
     });
-    
-    //router.use(cors({origin: 'http://localhost:3000'}));
+
+    router.use(cors({ origin: 'http://localhost:3000' }));
 
     router.get('/employee', isLoggedIn, (req, res) => {
         res.send('api works');
     });
     router.get('/fbuser', (req, res) => {
         res.send('fb works');
+    });
+
+    router.get('/login', isLoggedIn, isAdmin, (req, res) => {
+        res.redirect('/');
     });
 
     router.get('/admin', isLoggedIn, isAdmin, (req, res) => {
@@ -63,11 +67,18 @@ module.exports = function (app, passport) {
 
     router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
 
-    // handle the callback after facebook has authenticated the user
     router.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
             successRedirect: '/fbuser',
             failureRedirect: '/error'
+        }));
+
+    app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+    app.get('/auth/google/callback',
+        passport.authenticate('google', {
+            successRedirect: '/fbuser',
+            failureRedirect: '/'
         }));
 
     router.get('/logout', function (req, res) {

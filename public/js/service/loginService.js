@@ -12,4 +12,8 @@ app.service('loginService',function($http){
         return $http.get('/auth/facebook');
     }
 
+    this.googlelogin = function(){
+        return $http.get('/auth/google');
+    }
+
 });

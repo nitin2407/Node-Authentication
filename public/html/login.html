@@ -24,7 +24,8 @@
 					</div>
 				</md-input-container>
 				<md-button type="submit" ng-disabled="!loginForm.$valid" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
-				<md-button type="button" class="md-raised md-primary" ng-click="fbauth()">&nbsp Login with facebook &nbsp</md-button>
+				<a type="button" class="btn btn-link" ng-click="fbauth()"><i class="fa fa-facebook-square fa-3x" style="color: royalblue;" aria-hidden="true"></i></a>
+				<a type="button" class="btn btn-link" ng-click="googleauth()"><i class="fa fa-google fa-3x" style="color: indianred;"  aria-hidden="true"></i></a>
 			</form>
 		</md-card-content>
 	</md-card>
