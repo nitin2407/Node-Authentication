@@ -1,15 +1,27 @@
 app.controller('loginCtrl', function ($scope, $http, $timeout, $window, loginService, urlFactory) {
 
+
+	$scope.fbauth = function () {
+		loginService.fblogin().then(
+			function (data, status) {
+				console.log(data);
+			},
+			function (data, status) {
+				swal({
+					title: 'error',
+					type: 'warning',
+					showCloseButton: true
+				});
+			}
+		)
+	}
+
 	$scope.submitForm = function (isValid) {
 
 		$scope.userDetails = {
 			email: $scope.email,
 			password: $scope.password
 		};
-
-		$scope.fbauth = function(){
-			loginService.fblogin();
-		}
 
 		if (isValid) {
 
