@@ -1,0 +1,27 @@
+<form class='form-horizontal' role='form' name="empForm" ng-submit="submitForm(empForm.$valid)" novalidate>
+				<div class='form-group'>
+					<md-input-container>
+						<label>EmpId</label>
+						<input ng-model="empId" class='form-control' id='EmpId' placeholder='EmpId' type='text' name="empId" ng-required="true">
+					</md-input-container>
+					<div>
+						<md-button type="submit">Submit</md-button>
+					</div>
+				</div>
+			</form>
+			<section>
+			<md-content layout-padding>
+				<p>First Name: <span>{{firstName}}</span><p>
+	        	<p>Middle Name: <span>{{middleName}}</span><p>
+	        	<p>Last Name: <span>{{lastName}}</span><p>
+	        	<p>DOB: <span>{{dob}}</span><p>
+	        	<p>Marital Status: <span>{{maritalStatus}}</span><p>
+	        	<p>Employee Type: <span>{{empType}}</span><p>
+	        	<p>Employee Designation: <span>{{empDesignation}}</span><p>
+	        	<p>Title: <span>{{title}}</span><label>
+	        	<p>Work Authorization: <span>{{workAuthorization}}</span><p>
+	        	<p>Start Date: <span>{{startDate}}</span><p>
+	        	<p>End Date: <span>{{endDate}}</span><p>
+			</md-content>	
+			</section>
+

@@ -36,12 +36,15 @@ app.use(flash());
 app.use(cors());
 
 var api = require('./config/routes.js')(app, passport);
+var admin_route = require('./config/admin_route.js')(app);
 
 app.use('/', api);
 
-app.get('*', function (req, res) {
+app.use('/admin',admin_route);
+
+/*app.get('*', function (req, res) {
     res.sendfile('index.html');
-});
+});*/
 
 app.listen(3000);
 

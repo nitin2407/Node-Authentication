@@ -6,39 +6,60 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compartible" content="IE-edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Home</title>
+	<title>Admin-Home</title>
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.css">
+	<link rel="stylesheet" href="/scripts/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/scripts/angular-material/angular-material.min.css">
 	<link rel="stylesheet" href="../css/loginstyle.css">
 	<link rel="stylesheet" href="../css/sweetalert2.min.css">
 	<script src="../js/sweetalert2.min.js"></script>
 	<script src="../js/jquery-2.1.4.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-animate.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-messages.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-aria.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular-sanitize.min.js"></script>
+	<script src="/scripts/angular/angular.min.js"></script>
+	<script src="/scripts/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+	<script src="/scripts/angular-material/angular-material.min.js"></script>
+	<script src="/scripts/angular-animate/angular-animate.min.js"></script>
+	<script src="/scripts/angular-messages/angular-messages.min.js"></script>
+	<script src="/scripts/angular-aria/angular-aria.min.js"></script>
+	<script src="/scripts/angular-sanitize/angular-sanitize.js"></script>
 	<style>
-	.nav-header{
-		background-color: #212121;
-		color: white;
-	    -webkit-flex-shrink: 0;
-	    flex-shrink: 0;
-	    z-index: 2;
-	    padding-top: 5px;
-	}
-	.docs-menu, .docs-menu ul {
-    list-style: none;
-    padding: 0;
-    max-width: 100%;
-    overflow-x: hidden;
-	}
-	.sidenav-content{
-		background: #424242 !important;
+		.nav-header{
+			background-color: #212121;
+			color: white;
+		    -webkit-flex-shrink: 0;
+		    flex-shrink: 0;
+		    z-index: 2;
+		    padding-top: 20px;
+		    padding-bottom: 20px;
+		}
+		.docs-menu, .docs-menu ul {
+	    list-style: none;
+	    padding: 0;
+	    max-width: 100%;
+	    overflow-x: hidden;
+		}
+		.sidenav-content{
+			/*background: #424242 !important;*/
+			background: #212121 !important;
+		}
+
+		.sidebar-list{
+			padding-top: 0px;
+			padding-top: 0px;
+	    	font-family: serif;
+	    	font-weight: bold;
+	    	font-size: x-large;
+	    	color: white;
+		}
+		.header-text{
+			margin-bottom: 0px;
+			font-family: serif;
+			text-transform: uppercase;
+			letter-spacing: 4px;
+		}
+		.menu-text{		
+	    	letter-spacing: 3px;
+	    	padding-left: 10px;
 	}
     </style>
 </head>
@@ -46,26 +67,31 @@
 
 <body ng-app="AdminHome" layout="column" flex><!--<div flex="10" layout="column" style="height:100%;" ng-cloak>
 		<section layout="row" flex>-->
-		<md-toolbar class="md-hue-3" layout="row" md-whiteframe="3">
+		<md-toolbar class="md-hue-1" layout="row" md-whiteframe="20">
 			<div class="md-toolbar-tools">
 				<a flex md-truncate ui-sref="#">CompanyName</a>
 				<a md-button class="md-hue-1" ui-sref="Logout">Logout</a>
 			</div>
 		</md-toolbar>
 		<div layout="row" flex>
-			<md-sidenav flex="15" class="site-sidenav md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+			<md-sidenav flex="10" class="site-sidenav md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="23">
 				<!--<md-toolbar class="md-hue-2">
 					<md-content layout-padding>-->
-						<header layout="column" class="nav-header" layout-align="center center">
+						<header layout="column" class="nav-header" layout-align="center center" md-whiteframe="23">
 							<div><i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i></div>
-							<p style="margin-bottom: 0px">Nitin</p>
-							<p>Purohit</p>
+							<p class="header-text" >Nitin</p>
+							<p class="header-text">Purohit</p>
 						</header>
 						<md-content class="sidenav-content md-primary md-hue-3" flex>
-						<ul class="docs-menu">
+						<!--<ul class="docs-menu">
 							<li>Details
 							</li>
-						</ul>
+						</ul>-->
+						<md-list class="sidebar-list" flex layout="row" ng-cloak lauoyt-padding>
+						  <md-list-item flex layout-align="right" ng-click="doPrimaryAction($event)">
+						    <p class="menu-text">Profile</p>
+						  </md-list-item>
+
 						</md-content>
 					<!--</md-content>
 				</md-toolbar>-->
@@ -83,12 +109,10 @@
 
 	<script src="../js/app/app.js"></script>
 	<script src="../js/config/admin_theme.js"></script>
-	<script src="../js/config/routes.js"></script>
+	<script src="../js/config/admin_routes.js"></script>
 	<script src="../js/factory/urlFactory.js"></script>
-	<script src="../js/service/loginService.js"></script>
-	<script src="../js/service/signupService.js"></script>
-	<script src="../js/controllers/loginController.js"></script>
-	<script src="../js/controllers/signupController.js"></script>
+	<script src="../js/service/empService.js"></script>
+	<script src="../js/controllers/employeeController.js"></script>
 </body>
 
 

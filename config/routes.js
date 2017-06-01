@@ -27,7 +27,8 @@ module.exports = function (app, passport) {
         res.send('api works');
     });
     router.get('/fbuser', (req, res) => {
-        res.send('fb works');
+        //res.send('fb works');
+        res.redirect('/html/admin-home.html');
     });
 
     router.get('/login', isLoggedIn, isAdmin, (req, res) => {

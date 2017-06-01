@@ -1,4 +1,5 @@
-app.controller('EmpCtrl', function ($scope, $http, $window,$timeout,empService,urlFactory) {
+angular.module('AdminHome')
+	.controller('EmpCtrl', function ($scope, $http, $window,$timeout,empService) {
 
   
     $scope.submitForm = function (isValid) {
@@ -29,7 +30,7 @@ app.controller('EmpCtrl', function ($scope, $http, $window,$timeout,empService,u
 	                    showCloseButton: true
 	                });
 	                $timeout(function () {
-	                    $window.location.href = urlFactory.home();
+	                    //$window.location.href = urlFactory.home();
 	                }, 2000)
 	            }
 	        );
